@@ -6,7 +6,7 @@
 ECHO                  := @echo
 
 TARGET                ?= hw
-BOARD_NAME            ?= vck190
+BOARD_NAME            ?= vek280_es1
 PLATFORM_CUSTOM       ?= ${BOARD_NAME}_thin
 LINUX_PRE_BUILDS      ?= false
 

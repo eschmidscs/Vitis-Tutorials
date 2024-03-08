@@ -5,7 +5,7 @@
 
 ECHO                       := @echo
 
-BOARD_NAME                 ?= vck190
+BOARD_NAME                 ?= vek280_es1
 LINUX_MACHINE              ?= ${BOARD_NAME}-versal
 LINUX_ETH_CONFIG           ?= DHCP
 LINUX_BUILD_SOURCES        ?= network

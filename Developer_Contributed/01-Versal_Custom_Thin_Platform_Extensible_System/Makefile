@@ -34,7 +34,7 @@ export LINUX_PRE_BUILDS           := false
 export ILA_EN                     := 0
 
 # BOARD_NAME = vck190 or vek280 or vek280_es1
-export BOARD_NAME                 := vck190
+export BOARD_NAME                 := vek280_es1
 
 ###########################################################
 # Linux/Yocto Variables that may be changed to your needs #
