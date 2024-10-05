@@ -1,0 +1,7 @@
+-D__AIESIM__
+-Isrc
+-Isrc/graphs
+-I/opt/xilinx/Vitis/2024.1/aietools/include
+-I/opt/xilinx/Vitis_Libraries/2024.1/dsp/L1/include/aie
+-I/opt/xilinx/Vitis_Libraries/2024.1/dsp/L1/src/aie
+-I/opt/xilinx/Vitis_Libraries/2024.1/dsp/L2/include/aie

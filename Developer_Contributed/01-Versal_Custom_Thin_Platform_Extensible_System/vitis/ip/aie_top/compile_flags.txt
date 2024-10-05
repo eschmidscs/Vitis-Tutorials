@@ -1,0 +1,8 @@
+-I/opt/xilinx/Vitis/2023.2/aietools/include
+-I/home/eschmid/AMD/Vitis_Libraries/dsp/L1/include/aie
+-I/home/eschmid/AMD/Vitis_Libraries/dsp/L1/src/aie
+-I/home/eschmid/AMD/Vitis_Libraries/dsp/L2/include/aie
+-D__AIE_ARCH__=20
+-D__AIESIM__
+-I../aie/src/graphs
+-I../aie_fft/src/graphs
