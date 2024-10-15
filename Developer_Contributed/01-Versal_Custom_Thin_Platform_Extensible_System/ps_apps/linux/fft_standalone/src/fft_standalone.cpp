@@ -70,13 +70,13 @@ int main(int argc, char *argv[])
 
   ts_start = std::chrono::high_resolution_clock::now();
   xrt::device device = xrt::device(0);
-  xrt::uuid xclbin_uuid = device.load_xclbin(argv[0]);
+  xrt::uuid xclbin_uuid = device.load_xclbin(argv[1]);
   ts_stop = std::chrono::high_resolution_clock::now();
   log_elapsed("Elapsed time device/xclbin init", ts_start, ts_stop);
 
   ts_start = std::chrono::high_resolution_clock::now();
   xrt::kernel input_kernel(device, xclbin_uuid, "hls_fftb_reader:{read_fft}");
-  xrt::graph fft_graph(device, xclbin_uuid, "fftb_graph");
+  xrt::graph fft_graph(device, xclbin_uuid, "fft_graph_top");
   xrt::kernel output_kernel(device, xclbin_uuid, "hls_fftb_writer:{write_fft}");
   ts_stop = std::chrono::high_resolution_clock::now();
   log_elapsed("Elapsed time kernel load", ts_start, ts_stop);
