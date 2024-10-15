@@ -40,7 +40,11 @@ AIE_INCLUDE       += -include=${AIE_KERNELS}
 # Use to pass arguments to preprocessing # AIE_XFLAGS        := --Xpreproc="-DNB_FFT=${NB_FFT}"
 OTHER_OPTS        += --kernel-linting
 #OTHER_OPTS        += -Xchess="-std=c++17"
-OTHER_OPTS        += -xlopt=2
+OTHER_OPTS        += -xlopt=0
+OTHER_OPTS        += -heapsize=12288
+OTHER_OPTS        += -num-trace-streams=1
+OTHER_OPTS        += -event-trace-port=gmio
+OTHER_OPTS        += -event-trace=runtime
 OTHER_OPTS        += -Xmapper=BufferOptLevel7
 OTHER_OPTS        += --pl-freq=500.0
 OTHER_OPTS        += --pl-register-threshold=125
@@ -72,7 +76,7 @@ help::
 all          : ${AIE_OUTPUT}
 allx86       : clean x86compile x86sim
 
-${AIE_OUTPUT}: ${AIE_SRC}/* $(foreach grphm,$(AIE_GRAPHS),${grph}/*)
+${AIE_OUTPUT}: ${AIE_SRC}/* $(foreach grph,$(AIE_GRAPHS),${grph}/*)
 	$(MAKE) clean
 	aiecompiler ${AIECC_INCLUDES} \
 		${AIE_INCLUDE} \
