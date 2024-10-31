@@ -95,6 +95,7 @@ ${SD_CARD_LINUX}: ${BUILD_DIR}/${XSA} ${PS_LINUX_EXE} ${GRAPH_O} ${LINUX_KERNEL}
 			--package.image_format=${LINUX_ROOTFS_TYPE} \
 			--package.kernel_image=${LINUX_KERNEL} \
 			--package.rootfs=${LINUX_ROOTFS}  \
+			--package.defer_aie_run \
 			../${GRAPH_O} \
 			${XSA} \
 			$(addprefix --package.sd_file=../, ${PS_LINUX_EXE}) \
