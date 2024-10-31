@@ -94,7 +94,7 @@ int main(int argc, char *argv[])
   log_elapsed("Elapsed time output buffer allocate", ts_start, ts_stop);
 
   ts_start = std::chrono::high_resolution_clock::now();
-  fft_graph.run();
+  fft_graph.run(blocks);
   xrt::run output_run = output_kernel(output_buffer, nullptr, buffer_size / 8);
   xrt::run input_run = input_kernel(input_buffer, nullptr, buffer_size / 8);
   output_run.wait(1000);
