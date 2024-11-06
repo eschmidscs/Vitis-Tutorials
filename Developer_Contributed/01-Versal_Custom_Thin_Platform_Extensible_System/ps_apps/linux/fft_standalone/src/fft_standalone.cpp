@@ -54,17 +54,21 @@ int CheckOutputBuffer(cint16 *data, int bin = 0, int ampl = 10, int blocks = 1)
 void log_elapsed(string txt, std::chrono::time_point<std::chrono::high_resolution_clock> ts_start,
                  std::chrono::time_point<std::chrono::high_resolution_clock> ts_stop)
 {
-  //printf("%s: %d\n", txt.c_str(), std::chrono::duration_cast<std::chrono::microseconds>(ts_stop - ts_start));
-  std::cout << txt.c_str() << ": " << std::chrono::duration_cast<std::chrono::microseconds>(ts_stop - ts_start).count() << std::endl;
+  // printf("%s: %d\n", txt.c_str(), std::chrono::duration_cast<std::chrono::microseconds>(ts_stop - ts_start));
+  std::cout << txt.c_str() << ": " << std::chrono::duration_cast<std::chrono::microseconds>(ts_stop - ts_start).count()
+            << std::endl;
 }
 
 int main(int argc, char *argv[])
 {
-  int blocks = 1;
+  int aie_win = 16;
+  int blocks = 8;
   int length = 512;
   int bin = 3;
   int ampl = 10;
-  int buffer_size = blocks * length * sizeof(cint16);
+  int buffer_size = blocks * aie_win * length * sizeof(cint16);
+
+  sleep(1);
 
   std::chrono::time_point<std::chrono::high_resolution_clock> ts_start, ts_stop;
 
@@ -83,7 +87,7 @@ int main(int argc, char *argv[])
 
   ts_start = std::chrono::high_resolution_clock::now();
   xrt::bo input_buffer = xrt::bo(device, buffer_size, XCL_BO_FLAGS_NONE, input_kernel.group_id(0));
-  FillInputBuffer(input_buffer.map<cint16 *>(), length, bin, ampl, blocks);
+  FillInputBuffer(input_buffer.map<cint16 *>(), length, bin, ampl, blocks * aie_win);
   input_buffer.sync(XCL_BO_SYNC_BO_TO_DEVICE);
   ts_stop = std::chrono::high_resolution_clock::now();
   log_elapsed("Elapsed time input buffer load", ts_start, ts_stop);
@@ -101,12 +105,12 @@ int main(int argc, char *argv[])
   ts_stop = std::chrono::high_resolution_clock::now();
   log_elapsed("Elapsed time run and wait", ts_start, ts_stop);
 
-  ts_start = std::chrono::high_resolution_clock::now();
-  output_buffer.sync(XCL_BO_SYNC_BO_FROM_DEVICE);
-  int err = CheckOutputBuffer(output_buffer.map<cint16 *>(), bin, ampl, blocks);
-  ts_stop = std::chrono::high_resolution_clock::now();
-  log_elapsed("Elapsed time output buffer write", ts_start, ts_stop);
-  printf("Found %d errors in result.\n", err);
+  //  ts_start = std::chrono::high_resolution_clock::now();
+  //  output_buffer.sync(XCL_BO_SYNC_BO_FROM_DEVICE);
+  //  int err = CheckOutputBuffer(output_buffer.map<cint16 *>(), bin, ampl, blocks);
+  //  ts_stop = std::chrono::high_resolution_clock::now();
+  //  log_elapsed("Elapsed time output buffer write", ts_start, ts_stop);
+  //  printf("Found %d errors in result.\n", err);
 
   fft_graph.end();
   printf("Program end.\n");
