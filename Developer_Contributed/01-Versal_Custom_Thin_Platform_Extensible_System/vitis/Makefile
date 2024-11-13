@@ -28,7 +28,7 @@ LINUX_ROOTFS_TYPE     := ext4
 endif
 
 IP_DIR                := ./ip
-XO                    := $(wildcard ${IP_DIR}/xo_hw/*.xo)
+XO                    := $(wildcard ${IP_DIR}/xo_hw/hls*.xo)
 GRAPH_O               := ${IP_DIR}/aie_fft/libadf.a
 XCLBIN                := my.xclbin
 XSA                   := ${PLATFORM_CUSTOM}.xsa
